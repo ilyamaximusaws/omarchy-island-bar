@@ -1724,7 +1724,7 @@ Item {
     // An explicit zone instead of Auto: the reserved area stays the strip's
     // thickness though the window spans its screen.
     exclusionMode: root.barHidden ? ExclusionMode.Ignore : ExclusionMode.Normal
-    exclusiveZone: thickness
+    exclusiveZone: thickness + (root.barHidden ? 0 : edgeGap)
 
     // While this window's widget or bar-move drag is live, the whole surface
     // takes input (mask below), so the pointer never leaves the bar surface
@@ -1743,15 +1743,17 @@ Item {
       window: barWindow
     }
 
+    readonly property int edgeGap: Style.space(8)
+
     // Parked by the whole surface, which spans its screen, so none of it
     // stays on screen: not the strip, however thick a notch floor makes it,
     // nor the clear rest that a drag takes input on.
-    readonly property real parkDistance: root.vertical ? implicitWidth : implicitHeight
+    readonly property real parkDistance: (root.vertical ? implicitWidth : implicitHeight) + edgeGap
     margins {
-      top: root.barHidden && root.position === "top" ? -barWindow.parkDistance : 0
-      bottom: root.barHidden && root.position === "bottom" ? -barWindow.parkDistance : 0
-      left: root.barHidden && root.position === "left" ? -barWindow.parkDistance : 0
-      right: root.barHidden && root.position === "right" ? -barWindow.parkDistance : 0
+      top: root.position === "top" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
+      bottom: root.position === "bottom" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
+      left: root.position === "left" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
+      right: root.position === "right" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
     }
 
     anchors {
