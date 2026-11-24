@@ -2416,9 +2416,24 @@ Item {
     readonly property bool dragHere: active && !!root.barDragSource && root.sameWindow(root.barDragWindow, window)
     readonly property bool dropInto: dragHere && root.barDragRegion === "center"
     readonly property real extent: root.vertical ? boxList.height : boxList.width
+    readonly property bool hasContent: boxList.visible && box.extent > 0
 
     width: root.vertical ? crossSize : extent
     height: root.vertical ? extent : crossSize
+
+    // Animations for appearance / disappearance
+    opacity: hasContent ? 1 : 0
+    scale: hasContent ? 1 : 0.85
+    Behavior on opacity {
+      NumberAnimation { duration: Style.duration(220); easing.type: Easing.OutCubic }
+    }
+    Behavior on scale {
+      NumberAnimation { duration: Style.duration(220); easing.type: Easing.OutBack }
+    }
+
+    Behavior on width {
+      NumberAnimation { duration: Style.duration(200); easing.type: Easing.OutCubic }
+    }
 
     BorderSurface {
       anchors.fill: parent
@@ -2427,7 +2442,7 @@ Item {
       anchors.leftMargin: -Style.space(8)
       anchors.rightMargin: -Style.space(8)
       z: -1
-      visible: boxList.visible && box.extent > 0
+      visible: box.opacity > 0.01
       radius: Math.min(width, height) / 2
       color: root.transparent ? "transparent" : (root.glassy ? root.glassBackground : root.background)
       borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.2), 1)
