@@ -1942,6 +1942,7 @@ Item {
 
         CenterModules {
           anchors.fill: parent
+          anchors.verticalCenter: parent.verticalCenter
           window: barWindow
           pool: horizontalPool
           drawn: !barWindow.centerBesideRight
@@ -2273,7 +2274,10 @@ Item {
 
     BorderSurface {
       anchors.fill: parent
-      anchors.margins: -Style.space(4)
+      anchors.topMargin: -Style.space(2)
+      anchors.bottomMargin: -Style.space(2)
+      anchors.leftMargin: -Style.space(8)
+      anchors.rightMargin: -Style.space(8)
       z: -1
       visible: parent.visible && parent.childrenRect.width > 0
       radius: Math.min(width, height) / 2
@@ -2290,7 +2294,10 @@ Item {
 
     BorderSurface {
       anchors.fill: parent
-      anchors.margins: -Style.space(4)
+      anchors.topMargin: -Style.space(2)
+      anchors.bottomMargin: -Style.space(2)
+      anchors.leftMargin: -Style.space(8)
+      anchors.rightMargin: -Style.space(8)
       z: -1
       visible: parent.visible && parent.childrenRect.width > 0
       radius: Math.min(width, height) / 2
@@ -2384,9 +2391,9 @@ Item {
       pool: sections.pool
       active: sections.active
       fixedEdge: sections.besideRight ? "end" : "center"
-      crossSize: root.vertical ? sections.width : sections.height
+      crossSize: root.barSize
       x: root.vertical ? 0 : (sections.besideRight ? beginList.width : Math.round((sections.width - width) / 2))
-      y: root.vertical ? Math.round((sections.height - height) / 2) : 0
+      y: root.vertical ? Math.round((sections.height - height) / 2) : Math.round((sections.height - height) / 2)
     }
   }
 
@@ -2410,9 +2417,15 @@ Item {
     readonly property bool dropInto: dragHere && root.barDragRegion === "center"
     readonly property real extent: root.vertical ? boxList.height : boxList.width
 
+    width: root.vertical ? crossSize : extent
+    height: root.vertical ? extent : crossSize
+
     BorderSurface {
       anchors.fill: parent
-      anchors.margins: -Style.space(4)
+      anchors.topMargin: -Style.space(2)
+      anchors.bottomMargin: -Style.space(2)
+      anchors.leftMargin: -Style.space(8)
+      anchors.rightMargin: -Style.space(8)
       z: -1
       visible: boxList.visible && box.extent > 0
       radius: Math.min(width, height) / 2
@@ -2433,8 +2446,7 @@ Item {
       fixedEdge: box.fixedEdge
       firstEdge: box.fixedEdge === "center" ? "end" : ""
       lastEdge: box.fixedEdge === "center" ? "start" : ""
-      x: Math.round((box.width - width) / 2)
-      y: Math.round((box.height - height) / 2)
+      anchors.centerIn: parent
     }
 
     DropOutline {
