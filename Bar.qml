@@ -762,8 +762,8 @@ Item {
   // the cutout is this panel's minimum sensible top-bar height. An
   // intentionally taller bar still wins.
   function thicknessFor(screen) {
-    if (root.vertical || !screen) return root.barSize + Style.space(4)
-    return Math.max(root.barSize + Style.space(4), BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
+    if (root.vertical || !screen) return root.barSize
+    return Math.max(root.barSize, BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
   }
 
   // Each screen's bar thickness, by screen name: barSize, or more where a notch
@@ -1724,7 +1724,7 @@ Item {
     // An explicit zone instead of Auto: the reserved area stays the strip's
     // thickness though the window spans its screen.
     exclusionMode: root.barHidden ? ExclusionMode.Ignore : ExclusionMode.Normal
-    exclusiveZone: thickness + (root.barHidden ? 0 : edgeGap)
+    exclusiveZone: Math.round(barWindow.thickness - Style.space(2))
 
     // While this window's widget or bar-move drag is live, the whole surface
     // takes input (mask below), so the pointer never leaves the bar surface
