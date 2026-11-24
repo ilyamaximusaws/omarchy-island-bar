@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "custom.island-bar",
+  "name": "Island Bar",
+  "version": "1.0.0",
+  "description": "Floating pill islands status bar for Omarchy",
+  "kinds": [
+    "bar"
+  ],
+  "entryPoints": {
+    "bar": "Bar.qml"
+  }
+}
