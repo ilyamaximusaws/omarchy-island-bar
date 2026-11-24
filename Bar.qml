@@ -1724,7 +1724,7 @@ Item {
     // An explicit zone instead of Auto: the reserved area stays the strip's
     // thickness though the window spans its screen.
     exclusionMode: root.barHidden ? ExclusionMode.Ignore : ExclusionMode.Normal
-    exclusiveZone: Math.round(root.barSize + edgeGap - Style.space(2))
+    exclusiveZone: Math.round(root.barSize + edgeGap - Style.space(6))
 
     // While this window's widget or bar-move drag is live, the whole surface
     // takes input (mask below), so the pointer never leaves the bar surface
@@ -1743,7 +1743,7 @@ Item {
       window: barWindow
     }
 
-    readonly property int edgeGap: Style.space(4)
+    readonly property int edgeGap: 2
 
     // Parked by the whole surface, which spans its screen, so none of it
     // stays on screen: not the strip, however thick a notch floor makes it,
