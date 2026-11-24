@@ -2439,8 +2439,8 @@ Item {
       anchors.fill: parent
       anchors.topMargin: -Style.space(2)
       anchors.bottomMargin: -Style.space(2)
-      anchors.leftMargin: -Style.space(8)
-      anchors.rightMargin: -Style.space(8)
+      anchors.leftMargin: -Style.space(16)
+      anchors.rightMargin: -Style.space(16)
       z: -1
       visible: box.opacity > 0.01
       radius: Math.min(width, height) / 2
