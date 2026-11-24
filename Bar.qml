@@ -1724,7 +1724,7 @@ Item {
     // An explicit zone instead of Auto: the reserved area stays the strip's
     // thickness though the window spans its screen.
     exclusionMode: root.barHidden ? ExclusionMode.Ignore : ExclusionMode.Normal
-    exclusiveZone: Math.round(root.barSize + edgeGap - Style.space(6))
+    exclusiveZone: Math.round(root.barSize + edgeGap - Style.space(2))
 
     // While this window's widget or bar-move drag is live, the whole surface
     // takes input (mask below), so the pointer never leaves the bar surface
@@ -1944,7 +1944,8 @@ Item {
 
         CenterModules {
           anchors.fill: parent
-          anchors.verticalCenter: parent.verticalCenter
+          anchors.topMargin: -Style.space(2)
+          anchors.verticalCenter: undefined
           window: barWindow
           pool: horizontalPool
           drawn: !barWindow.centerBesideRight
@@ -1955,7 +1956,8 @@ Item {
           pool: horizontalPool
           anchors.left: parent.left
           anchors.leftMargin: Style.space(8)
-          anchors.verticalCenter: parent.verticalCenter
+          anchors.top: parent.top
+          anchors.topMargin: Style.space(2)
         }
 
         RightModules {
@@ -1964,7 +1966,8 @@ Item {
           id: rightModules
           anchors.right: parent.right
           anchors.rightMargin: Style.space(8)
-          anchors.verticalCenter: parent.verticalCenter
+          anchors.top: parent.top
+          anchors.topMargin: Style.space(2)
         }
 
         // Where a display notch covers the middle of the bar, the center
