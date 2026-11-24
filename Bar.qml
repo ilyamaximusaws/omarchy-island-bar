@@ -762,8 +762,8 @@ Item {
   // the cutout is this panel's minimum sensible top-bar height. An
   // intentionally taller bar still wins.
   function thicknessFor(screen) {
-    if (root.vertical || !screen) return root.barSize
-    return Math.max(root.barSize, BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
+    if (root.vertical || !screen) return root.barSize + Style.space(8)
+    return Math.max(root.barSize + Style.space(8), BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
   }
 
   // Each screen's bar thickness, by screen name: barSize, or more where a notch
@@ -1752,8 +1752,8 @@ Item {
     margins {
       top: root.position === "top" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
       bottom: root.position === "bottom" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
-      left: root.position === "left" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
-      right: root.position === "right" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : 0
+      left: root.vertical && root.position === "left" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : barWindow.edgeGap
+      right: root.vertical && root.position === "right" ? (root.barHidden ? -barWindow.parkDistance : barWindow.edgeGap) : barWindow.edgeGap
     }
 
     anchors {
@@ -2284,7 +2284,7 @@ Item {
       visible: parent.visible && parent.childrenRect.width > 0
       radius: Math.min(width, height) / 2
       color: root.transparent ? "transparent" : (root.glassy ? root.glassBackground : root.background)
-      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.2), 1)
+      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.4), 1)
       opacity: root.transparent ? 0 : 0.95
     }
   }
@@ -2304,7 +2304,7 @@ Item {
       visible: parent.visible && parent.childrenRect.width > 0
       radius: Math.min(width, height) / 2
       color: root.transparent ? "transparent" : (root.glassy ? root.glassBackground : root.background)
-      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.2), 1)
+      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.4), 1)
       opacity: root.transparent ? 0 : 0.95
     }
   }
@@ -2447,7 +2447,7 @@ Item {
       visible: box.opacity > 0.01
       radius: Math.min(width, height) / 2
       color: root.transparent ? "transparent" : (root.glassy ? root.glassBackground : root.background)
-      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.2), 1)
+      borderSpec: Border.flat(Qt.rgba(root.barForeground.r, root.barForeground.g, root.barForeground.b, 0.4), 1)
       opacity: root.transparent ? 0 : 0.95
     }
 
