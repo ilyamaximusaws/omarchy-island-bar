@@ -762,8 +762,8 @@ Item {
   // the cutout is this panel's minimum sensible top-bar height. An
   // intentionally taller bar still wins.
   function thicknessFor(screen) {
-    if (root.vertical || !screen) return root.barSize + Style.space(8)
-    return Math.max(root.barSize + Style.space(8), BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
+    if (root.vertical || !screen) return root.barSize + Style.space(4)
+    return Math.max(root.barSize + Style.space(4), BarModel.notchFloor(root.displayCutouts, root.position, screen.name, screen.width, screen.height, screen.devicePixelRatio, root.panelModeFor(screen), Style.bar.notchHeight))
   }
 
   // Each screen's bar thickness, by screen name: barSize, or more where a notch
@@ -1743,7 +1743,7 @@ Item {
       window: barWindow
     }
 
-    readonly property int edgeGap: Style.space(8)
+    readonly property int edgeGap: Style.space(4)
 
     // Parked by the whole surface, which spans its screen, so none of it
     // stays on screen: not the strip, however thick a notch floor makes it,
